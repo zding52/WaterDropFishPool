@@ -59,14 +59,40 @@
 			// you may also add code outside of the function (e.g., global variables)
 			function myGradientInteraction(){
 				var tool = new paper.Tool();
-
+         // Create a Paper.js path to draw a triangle into it
+        let path = new paper.Path();
+        // Add three points to the path
+        path.add(new paper.Point(230, 470));
+        path.add(new paper.Point(230, 120));
+        path.add(new paper.Point(450, 120));
+        path.add(new paper.Point(450, 470));
+        // Close the path
+        path.closed = true;
+        // Give the path a color and fill color
+        //path.strokeColor = 'black';
+        path.strokeWidth = 5;
+        path.fillColor = 'red';
+        // Draw the path now
+        paper.view.draw();   
+        var start = null; 
+        var end = null;
 				tool.onMouseDown = function (event) {
-
+            start = event.point;
 				}
 
 				tool.onMouseUp = function (event) {
-					
+					  end = event.point;
+            path.fillColor = {
+              gradient:{
+                stops:[ cp.history[cp.history.length - 2], cp.history[cp.history.length - 1]]//todo
+                
+              },
+              origin: start,
+              destination: end
+          
+            };
 				}
+        
 			}
 
 			// your custom interaction goes here!

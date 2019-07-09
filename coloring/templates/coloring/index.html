@@ -2,173 +2,63 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  	<title>P3 Coloring</title>
+  <title>Task 2</title>
 
-	<script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static '/vendors/bootstrap/css/bootstrap.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}" />
 
-	<style type="text/css">
-		#color-palette {
-			width: 300px;
-			background-color: #f1f1f1;
-			display: flex;
-			flex-wrap: wrap;
-			position: absolute;
-			top: 0;
-		}
+  <script src="{% static '/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static '/vendors/jquery-ui/jquery-ui.min.js' %}"></script>
 
-		.swatch {
-			width: 24px;
-			height: 24px;
-			-moz-border-radius: 12px;
-			-webkit-border-radius: 12px;
-			border-radius: 12px;
-			margin: 3px;
-		}
-
-		#myCanvas {
-			padding-left: 0;
-		    padding-right: 0;
-		    margin-left: auto;
-		    margin-right: auto;
-		    display: block;
-		}
-	</style>
-
-	<script type="text/javascript" canvas="canvas">
-		window.onload = function() {
-			var canvas = document.getElementById('myCanvas');
-
-			// coloring page
-			var mandala = {
-				item: null,
-				lastClicked: null,
-				filePath: '/static/coloring/images/mandala-freepik.svg'
-			};	
-
-			// color palette
-			var cp = {
-				history: ["#000000"], // black selected by default
-				options: [],
-				$container: $('#color-palette')
-			}
-
-			// your rectangle gradient interaction goes in this function
-			// you may also add code outside of the function (e.g., global variables)
-			function myGradientInteraction(){
-				var tool = new paper.Tool();
-         // Create a Paper.js path to draw a triangle into it
-        let path = new paper.Path();
-        // Add three points to the path
-        path.add(new paper.Point(230, 470));
-        path.add(new paper.Point(230, 120));
-        path.add(new paper.Point(450, 120));
-        path.add(new paper.Point(450, 470));
-        // Close the path
-        path.closed = true;
-        // Give the path a color and fill color
-        //path.strokeColor = 'black';
-        path.strokeWidth = 5;
-        path.fillColor = 'red';
-        // Draw the path now
-        paper.view.draw();   
-        var start = null; 
-        var end = null;
-				tool.onMouseDown = function (event) {
-            start = event.point;
-				}
-
-				tool.onMouseUp = function (event) {
-					  end = event.point;
-            path.fillColor = {
-              gradient:{
-                stops:[ cp.history[cp.history.length - 2], cp.history[cp.history.length - 1]]//todo
-                
-              },
-              origin: start,
-              destination: end
-          
-            };
-				}
-        
-			}
-
-			// your custom interaction goes here!
-			// you may replace everything
-			function myCustomInteraction() {
-				var tool = new paper.Tool();
-
-				tool.onMouseDown = function (event) {
-				    var hit = mandala.item.hitTest(event.point, { tolerance: 10, fill: true });
-				    if (hit) {
-				        hit.item.fillColor = cp.history[cp.history.length - 1];
-				    }
-				}
-			}
-
-
-			// create a color palette with the given colors
-			function createColorPalette(colors){
-
-				// create a swatch for each color
-				for (var i = colors.length - 1; i >= 0; i--) {
-					var $swatch = $("<div>").css("background-color", colors[i])
-									   .addClass("swatch");
-					$swatch.click(function(){
-						// add color to the color palette history
-					  	cp.history.push($(this).css("background-color"));
-					});
-					cp.$container.append($swatch);
-				}
-			}
-
-			// loads a set of colors from a json to create a color palette
-			function getColorsCreatePalette(){
-				cp.$container.html(" ");
-				$.getJSON('/static/coloring/vendors/material/material-colors.json', function(colors){
-					var keys = Object.keys(colors);
-					for (var i = keys.length - 1; i >= 0; i--) {
-						cp.options.push(colors[keys[i]][500]);
-					}
-					createColorPalette(cp.options);
-				});
-			}
-
-			function init(custom){
-				paper.setup(canvas);
-				getColorsCreatePalette();
-
-				paper.project.importSVG(mandala.filePath, function(item) { 
-					mandala.item = item._children["design-freepik"];
-				    paper.project.insertLayer(0,mandala.item);
-
-				    if (custom) {
-				    	myCustomInteraction();	
-				    } else {
-				    	myGradientInteraction();
-				    }		
-					
-				}); 
-			}
-
-			// To see your myGradientInteraction version visit: 
-			// http://<your url>:8000/coloring/?type=gradient
-			// To see your myCustomInteraction version visit: 
-			// http://<your url>:8000/coloring/
-			var url = window.location.href;
-			if (url.indexOf("gradient") > -1) {
-				init(false);
-			} else {
-				init(true);
-			}
-		}
-	</script>
 </head>
-<body>	
 
-	<canvas id="myCanvas" width="750px" height="750px"></canvas>
-	<div id="color-palette"></div>
+<body>
+  
+<!--     <div class="row">
+      <div class="col-12"> -->
+<!--         <div class="shape-container"> -->
+ <div id="wrapper">
+  <div class="content">
+    <P> this is front </P>
+  </div>
+  <div class="background" style="z-index:-90; width:100%; height:auto; top:-10px; position:fixed; right:0;">
+    <object type="application/x-shockwave-flash" style="outline:none;" data="https://cdn.abowman.com/widgets/fish/fish.swf?up_fishColor4=F45540&up_fishColor9=F45540&up_fishColor2=FF7C54&up_fishColor6=F45540&up_fishColor5=F45540&up_fishColor10=F45540&up_foodColor=FCB347&up_fishColor3=FF7C54&up_fishColor1=FF7C54&up_backgroundImage=http://&up_fishName=Fish&up_numFish=3&up_fishColor7=F45540&up_fishColor8=F45540&up_backgroundColor=F2F8FF&"
+      width="1280" height="710"><param name="movie" value="https://cdn.abowman.com/widgets/fish/fish.swf?up_fishColor4=F45540&up_fishColor9=F45540&up_fishColor2=FF7C54&up_fishColor6=F45540&up_fishColor5=F45540&up_fishColor10=F45540&up_foodColor=FCB347&up_fishColor3=FF7C54&up_fishColor1=FF7C54&up_backgroundImage=http://&up_fishName=Fish&up_numFish=3&up_fishColor7=F45540&up_fishColor8=F45540&up_backgroundColor=F2F8FF&"></param><param name="AllowScriptAccess" value="always"></param><param name="wmode" value="opaque"></param><param name="scale" value="noscale"/><param name="salign" value="tl"/></object>
+  </div>
+</div>
+          
+          <!---
+- The width:auto; is important. Don't change it. It will extend if you change the width in the embed code.
+- The height is 100% so that the fish pond will stretch from the top of your blog all the way to the bottom of it.
+- top:-10px; is how far away the pond is from the top of your blog. It is negative because some of it is going over the top. You can also change that number to top:0px; if you want (mine is negative because I have a blog border)
+- position:fixed; is important don't move that
+- right:0; ensures that your fish pond is right up against the right side of your screen/blog. You can change that to left:0; if you want the pond on the left of your blog.
+- Make sure you change the height and width in your embed code to match the <div style= codes.
+--->
+          <!-- Dynamically add your circles here! -->
+          <!-- Example circle: <div class="p2-circle bg-blue"></div> -->
+<!--         </div>
+      </div> -->
+    </div>
+  </div>
+
+
+  <!-- <script type="text/javascript">
+var myVar = setInterval(myTimer,1000);
+function myTimer(){
+  $('.shape-container').append('<div class="p2-circle bg-blue"></div>');
+}  
+function myStopFunction(){
+  clearInterval(myVar);
+}
+	// your solution here
+  
+    
+
+</script> -->
 </body>
+
 </html>

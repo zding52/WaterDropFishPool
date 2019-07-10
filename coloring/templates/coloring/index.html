@@ -12,7 +12,9 @@
 
   <script src="{% static '/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
   <script src="{% static '/vendors/jquery-ui/jquery-ui.min.js' %}"></script>
-
+ 
+	<script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
 </head>
 
 <body>
@@ -22,43 +24,18 @@
 <!--         <div class="shape-container"> -->
  <div id="wrapper">
   <div class="content">
-    <P> this is front </P>
+    <img class="splatter" src="http://officialpsds.com/imageview/ry/mx/rymxp3_large.png?1521316512">
   </div>
   <div class="background" style="z-index:-90; width:100%; height:auto; top:-10px; position:fixed; right:0;">
     <object type="application/x-shockwave-flash" style="outline:none;" data="https://cdn.abowman.com/widgets/fish/fish.swf?up_fishColor4=F45540&up_fishColor9=F45540&up_fishColor2=FF7C54&up_fishColor6=F45540&up_fishColor5=F45540&up_fishColor10=F45540&up_foodColor=FCB347&up_fishColor3=FF7C54&up_fishColor1=FF7C54&up_backgroundImage=http://&up_fishName=Fish&up_numFish=3&up_fishColor7=F45540&up_fishColor8=F45540&up_backgroundColor=F2F8FF&"
       width="1280" height="710"><param name="movie" value="https://cdn.abowman.com/widgets/fish/fish.swf?up_fishColor4=F45540&up_fishColor9=F45540&up_fishColor2=FF7C54&up_fishColor6=F45540&up_fishColor5=F45540&up_fishColor10=F45540&up_foodColor=FCB347&up_fishColor3=FF7C54&up_fishColor1=FF7C54&up_backgroundImage=http://&up_fishName=Fish&up_numFish=3&up_fishColor7=F45540&up_fishColor8=F45540&up_backgroundColor=F2F8FF&"></param><param name="AllowScriptAccess" value="always"></param><param name="wmode" value="opaque"></param><param name="scale" value="noscale"/><param name="salign" value="tl"/></object>
   </div>
+  <canvas id="myCanvas" width="750px" height="750px"></canvas>
+	<div id="color-palette" style="z-index = 100;"></div>
+
 </div>
           
-          <!---
-- The width:auto; is important. Don't change it. It will extend if you change the width in the embed code.
-- The height is 100% so that the fish pond will stretch from the top of your blog all the way to the bottom of it.
-- top:-10px; is how far away the pond is from the top of your blog. It is negative because some of it is going over the top. You can also change that number to top:0px; if you want (mine is negative because I have a blog border)
-- position:fixed; is important don't move that
-- right:0; ensures that your fish pond is right up against the right side of your screen/blog. You can change that to left:0; if you want the pond on the left of your blog.
-- Make sure you change the height and width in your embed code to match the <div style= codes.
---->
-          <!-- Dynamically add your circles here! -->
-          <!-- Example circle: <div class="p2-circle bg-blue"></div> -->
-<!--         </div>
-      </div> -->
-    </div>
-  </div>
 
-
-  <!-- <script type="text/javascript">
-var myVar = setInterval(myTimer,1000);
-function myTimer(){
-  $('.shape-container').append('<div class="p2-circle bg-blue"></div>');
-}  
-function myStopFunction(){
-  clearInterval(myVar);
-}
-	// your solution here
-  
-    
-
-</script> -->
 </body>
 
 </html>
